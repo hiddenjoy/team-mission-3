@@ -57,7 +57,7 @@ const TodoList = () => {
   return (
     <div className={styles.container}>
       <h1 className="text-xl mb-4 font-bold underline underline-offset-4 decoration-wavy">
-        Todo List
+        What I Did List
       </h1>
       {/* 할 일을 입력받는 텍스트 필드입니다. */}
       <input
@@ -72,7 +72,7 @@ const TodoList = () => {
           className="w-40 justify-self-end p-1 mb-4 bg-pink-500 text-white border border-pink-500 rounded hover:bg-white hover:text-pink-500"
           onClick={addTodo}
         >
-          Add Todo
+          Add What I did
         </button>
       </div>
       {/* 할 일 목록을 렌더링합니다. */}
