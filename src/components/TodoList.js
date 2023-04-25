@@ -24,7 +24,16 @@ const TodoList = () => {
     //   completed: 완료 여부,
     // }
     // ...todos => {id: 1, text: "할일1", completed: false}, {id: 2, text: "할일2", completed: false}}, ..
-    setTodos([...todos, { id: Date.now(), text: input, completed: false }]);
+    setTodos([
+      ...todos,
+      {
+        id: Date.now(),
+        date: new Date(),
+        text: input,
+        completed: false,
+      },
+    ]);
+
     setInput("");
   };
 
@@ -53,10 +62,21 @@ const TodoList = () => {
     );
   };
 
+  // `completed` 값이 `true`인 아이템들을 맨 뒤로 이동시키는 함수
+  const sortTodos = (a, b) => {
+    if (a.completed && !b.completed) {
+      return 1;
+    }
+    if (!a.completed && b.completed) {
+      return -1;
+    }
+    return 0;
+  };
+
   // 컴포넌트를 렌더링합니다.
   return (
     <div className={styles.container}>
-      <h1 className="text-xl mb-4 font-bold shadow-lg underline underline-offset-4 decoration-wavy">
+      <h1 className="text-xl mb-4 font-bold shadow-lg underline underline-offset-4 decoration-wavy bg-white bg-opacity-50">
         What I Did List
       </h1>
       {/* 할 일을 입력받는 텍스트 필드입니다. */}
@@ -77,7 +97,7 @@ const TodoList = () => {
       </div>
       {/* 할 일 목록을 렌더링합니다. */}
       <ul>
-        {todos.map((todo) => (
+        {[...todos].sort(sortTodos).map((todo) => (
           <TodoItem
             key={todo.id}
             todo={todo}
